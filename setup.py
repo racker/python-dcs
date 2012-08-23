@@ -38,7 +38,7 @@ setup(
     requires=([], ['simplejson'],)[pre_python26],
     scripts=['bin/dcs-builder.py'],
     packages={
-      'dcs': 'dcs'
+        'dcs': 'dcs'
     },
     package_dir={
         'dcs': 'dcs',
