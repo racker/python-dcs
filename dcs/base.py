@@ -75,7 +75,8 @@ class Node(Resource):
 
 
 class ResourceGather(object):
-    sections = ['product',
+    sections = ['global',
+               'product',
                'environment',
                'region',
                'datacenter',
@@ -113,6 +114,9 @@ class ResourceGather(object):
         for node in self._nodes:
             ni = node._explode_hostname()
             for section in self.sections:
+                if section not in self._resources:
+                    continue
+
                 resource = self._resources[section].get(ni[section], None)
                 if resource:
                     node.merge(resource)

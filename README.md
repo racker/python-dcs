@@ -40,7 +40,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
 
 `
     {
-      "region": "ord1",
+      "region": "ord1"
     }
 `
 
@@ -57,7 +57,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
 
 `
     {
-      "internal_ip": "10.200.1.20",
+      "internal_ip": "10.200.1.20"
     }
 `
 
