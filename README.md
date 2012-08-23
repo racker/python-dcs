@@ -20,7 +20,7 @@ Attributes are combined (merged) in the following order:
 
 ## Running it
 
-    bin/dcs-builder.py <path/to/your/repo> <path/to/output>
+    bin/dcs-builder.py [--validate] --source=<path to the directory with attributes files> --output=<output directory>
 
 ## Example
 
