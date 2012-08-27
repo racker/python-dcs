@@ -15,6 +15,7 @@
 
 import re
 import os
+import sys
 from collections import defaultdict
 from os.path import join as pjoin
 from os.path import basename
@@ -131,10 +132,21 @@ class ResourceGather(object):
         return self._nodes
 
 
-def runit(inputdir, outputdir):
+def runit(inputdir, outputdir, dry_run=False):
     rg = ResourceGather()
-    rg.load(inputdir)
+
+    try:
+        rg.load(inputdir)
+    except Exception, e:
+        print 'Syntax error in file: %s' % (e.filename)
+        print str(e)
+        sys.exit(1)
+
     nodes = rg.get_merged_nodes()
+
+    if dry_run:
+        print 'No syntax error detected'
+        return
 
     for n in nodes:
         outpath = pjoin(outputdir, n._hostname) + '.json'

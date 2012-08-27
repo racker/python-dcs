@@ -26,10 +26,13 @@ def main():
     if not os.path.exists(options.source):
         raise Exception('Source directory must exist')
 
-    if not os.path.exists(options.output):
-        os.makedirs(options.output)
+    if options.validate:
+        base.runit(options.source, None, dry_run=True)
+    else:
+        if not os.path.exists(options.output):
+            os.makedirs(options.output)
 
-    base.runit(options.source, options.output)
+        base.runit(options.source, options.output)
 
 if __name__ == '__main__':
     main()
