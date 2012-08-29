@@ -76,8 +76,7 @@ class Node(Resource):
 
 
 class ResourceGather(object):
-    sections = ['global',
-               'product',
+    sections = ['product',
                'environment',
                'region',
                'datacenter',

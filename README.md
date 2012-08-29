@@ -15,7 +15,6 @@ can be used by Chef Solo.
 
 Attributes are combined (merged) in the following order:
 
-1. global
 2. product
 3. environment
 4. region
