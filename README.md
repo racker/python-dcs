@@ -10,8 +10,8 @@ DSC sets up a series of JSON-like files that are combined at build time to a JSO
 
 ## How it works
 
-DCS combines attributes from multiple JSON files into a single JSON file which can
-be used by Chef Solo.
+DCS combines attributes from multiple JSON files into a single JSON file which
+can be used by Chef Solo.
 
 Attributes are combined (merged) in the following order:
 
@@ -19,18 +19,32 @@ Attributes are combined (merged) in the following order:
 2. product
 3. environment
 4. region
-5. datacenter
+5. data center
 6. purpose
+
+Attributes are inferred from the node name which means the name needs to be in
+the following format:
+
+`(?P<datacenter>\w+)(?P<datacenter_number>\d+)-(?P<product>\w+)-(?P<environment>\w+)-(?P<purpose>\w+)(?P<purpose_number>\d+)(\..*){0,1}$`
+
+Example attribute values using the name `dfw1-maas-stage-api0` with a node file
+stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
+
+* region: `dfw` (file: `region/dfw.dyp`)
+* datacenter: `dfw1` (file: `datacenter/dfw1.dyp`)
+* product: `maas` (file: `product/maas.dyp`)
+* environment: `stage` (file: `environment/stage.dyp`)
+* purpose: `api` (file: `purpose/api.dyp`)
 
 ## Running it
 
-    bin/dcs-builder.py [--validate] --source=<path to the directory with attributes files> --output=<output directory>
+`bin/dcs-builder.py [--validate] --source=<path to the directory with attributes files> --output=<output directory>`
 
 ## Example
 
 For a machine with name `ord1-maas-prod-api0`, with the following files:
 
-* environments/prod.dyp:
+* environment/prod.dyp:
 
 `
     {
@@ -40,7 +54,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* regions/ord1.dyp:
+* region/ord1.dyp:
 
 `
     {
@@ -57,7 +71,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* hosts/ord1-maas-prod-api0.dyp:
+* nodes/ord1-maas-prod-api0.k1k.me.dyp:
 
 `
     {
@@ -77,3 +91,5 @@ These sources would be compiled into a single `ord1-maas-prod-api0.json` suitabl
       "run_list": ["role[ele-base]",
                    "recipe[ele-base::api]"]
     }
+
+Another example can be found [here](https://github.com/racker/python-dcs/tree/master/examples/example-1).
