@@ -4,6 +4,10 @@ Dynamic Chef Solo provides an easier to produce the JSON attributes used by Chef
 
 DSC sets up a series of JSON-like files that are combined at build time to a JSON file suitable for use by Chef Solo.  By building in concepts like environment, datacenter, purpose, and individual node attributes we can produce a richer and easier to use configuration system.
 
+## Installation
+
+`sudo pip install dcs`
+
 ## How it works
 
 DCS combines attributes from multiple JSON files into a single JSON file which can
