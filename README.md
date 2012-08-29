@@ -25,7 +25,7 @@ Attributes are combined (merged) in the following order:
 Attributes are inferred from the node name which means the name needs to be in
 the following format:
 
-`(?P<datacenter>\w+)(?P<datacenter_number>\d+)-(?P<product>\w+)-(?P<environment>\w+)-(?P<purpose>\w+)(?P<purpose_number>\d+)(\..*){0,1}$`
+`^(?P<datacenter>\w+)(?P<datacenter_number>\d+)-(?P<product>\w+)-(?P<environment>\w+)-(?P<purpose>\w+)(?P<purpose_number>\d+)(\..*){0,1}$`
 
 Example attribute values using the name `dfw1-maas-stage-api0` with a node file
 stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
