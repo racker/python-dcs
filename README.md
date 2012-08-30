@@ -90,7 +90,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
 {
     "is_active": true
 }
-`
+```
 
 * `nodes-info/ord1-maas-prod-api0.k1k.me.dyp`
 
