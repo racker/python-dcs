@@ -24,13 +24,18 @@ Attributes are combined (merged) in the following order:
 4. data center (directory: datacenters/)
 5. purpose (directory: purposes/)
 
-Only attribute which is treated specially is `run_list`. This attribute needs
+An attribute which is treated specially is `run_list`. This attribute needs
 to be a list and when merging multiple files with this attributes, lists are
 concatenated together. For an example, see the "Example" section bellow.
 
+Another directory which is special is `nodes-info` directory. This directory
+contains JSON files which contain server information (e.g. information
+obtained by `ohai` / `facter`). File names in this directory must match the
+server name. Attributes from this file are stored in the `info` attribute in
+the generated JSON file.
 
-Attributes are inferred from the node name which means the name needs to be in
-the following format:
+Main attributes are inferred from the node name which means the name needs to 
+be in the following format:
 
 `^(?P<datacenter>\w+)(?P<datacenter_number>\d+)-(?P<product>\w+)-(?P<environment>\w+)-(?P<purpose>\w+)(?P<purpose_number>\d+)(\..*){0,1}$`
 
@@ -108,7 +113,6 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 }
 ```
-
 
 These sources would be compiled into a single `ord1-maas-prod-api0.json` suitable for use by `chef-solo`:
 
