@@ -52,7 +52,7 @@ stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
 
 `bin/dcs-builder.py [--validate] --source=<path to the directory with attributes files> --output=<output directory>`
 
-## Example
+## Example 1
 
 For a machine with name `ord1-maas-prod-api0`, with the following files:
 
@@ -143,4 +143,11 @@ These sources would be compiled into a single `ord1-maas-prod-api0.json` suitabl
 }
 ```
 
+## Example 2
+
 Another example can be found [here](https://github.com/racker/python-dcs/tree/master/examples/example-1).
+
+To generate the output files, you can run the following command:
+
+`dcs-builder.py [--validate] --source=examples/example-1/ --output=out`
+
