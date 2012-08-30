@@ -53,50 +53,90 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
 
 * `environments/prod.dyp`:
 
-`
-    {
-      "environment": "production",
-      "auth_servers": ["https://identity.api.rackspacecloud.com/"],
-      "run_list": ["role[ele-base]"]
-    }
-`
+```javascript
+{
+    "environment": "production",
+    "auth_servers": [
+        "https://identity.api.rackspacecloud.com/"
+    ],
+    "run_list": [
+        "role[ele-base]"
+    ]
+}
+```
 
 * `regions/ord1.dyp`:
 
-`
-    {
-      "region": "ord1"
-    }
-`
+```javascript
+{
+    "region": "ord1"
+}
+```
 
 * `purposes/api.dyp`:
 
-`
-    {
-      "mail_relay": "smtp.sendgrid.com",
-      "run_list": ["recipe[ele-base::api]"]
-    }
-`
+```javascript
+{
+    "mail_relay": "smtp.sendgrid.com",
+    "run_list": [
+        "recipe[ele-base::api]"
+    ]
+}
+```
 
 * `nodes/ord1-maas-prod-api0.k1k.me.dyp`:
 
+```javascript
+{
+    "is_active": true
+}
 `
-    {
-      "internal_ip": "10.200.1.20"
+
+* `nodes-info/ord1-maas-prod-api0.k1k.me.dyp`
+
+```javascript
+{
+    "interfaces": {
+        "eth1": {
+            "ipv4": "10.180.1.1",
+            "ipv6": null
+        },
+        "eth0": {
+            "ipv4": "198.101.200.200",
+            "ipv6": null
+        }
     }
-`
+}
+```
 
 
 These sources would be compiled into a single `ord1-maas-prod-api0.json` suitable for use by `chef-solo`:
 
-    {
-      "internal_ip": "10.200.1.20",
-      "mail_relay": "smtp.sendgrid.com",
-      "region": "ord1",
-      "environment": "production",
-      "auth_servers": ["https://identity.api.rackspacecloud.com/"],
-      "run_list": ["role[ele-base]",
-                   "recipe[ele-base::api]"]
+```javascript
+{
+    "is_active": true,
+    "mail_relay": "smtp.sendgrid.com",
+    "region": "ord1",
+    "environment": "production",
+    "auth_servers": [
+        "https://identity.api.rackspacecloud.com/"
+    ],
+    "run_list": [
+        "role[ele-base]"
+    ],
+    "info": {
+        "interfaces": {
+            "eth0": {
+                "ipv4": "198.101.220.207",
+                "ipv6": null
+            },
+            "eth1": {
+                "ipv4": "10.180.161.14",
+                "ipv6": null
+            }
+        }
     }
+}
+```
 
 Another example can be found [here](https://github.com/racker/python-dcs/tree/master/examples/example-1).
