@@ -76,24 +76,26 @@ class Node(Resource):
 
 
 class ResourceGather(object):
-    sections = ['product',
-               'environment',
-               'region',
-               'datacenter',
-               'purpose']
+    sections_map = {
+        'product': 'products',
+        'environment': 'environments',
+        'region': 'regions',
+        'datacenter': 'datacenters',
+        'purpose': 'purposes'
+        }
 
     def __init__(self):
         self._resources = defaultdict(dict)
         self._nodes = []
 
     def load(self, rootpath):
-        for sd in self.sections:
-            spath = pjoin(rootpath, sd, '*.dyp')
+        for section, directory in self.sections_map.items():
+            spath = pjoin(rootpath, directory, '*.dyp')
             for dyp in glob(spath):
                 r = Resource()
                 r.load(dyp)
                 bname = basename(dyp)[:-4]
-                self._resources[sd][bname] = r
+                self._resources[section][bname] = r
 
         spath = pjoin(rootpath, 'nodes', '*.dyp')
         for dyp in glob(spath):
@@ -113,7 +115,7 @@ class ResourceGather(object):
     def get_merged_nodes(self):
         for node in self._nodes:
             ni = node._explode_hostname()
-            for section in self.sections:
+            for section, _ in self.sections_map.items():
                 if section not in self._resources:
                     continue
 
@@ -137,6 +139,7 @@ def runit(inputdir, outputdir, dry_run=False):
     try:
         rg.load(inputdir)
     except Exception, e:
+        print e
         print 'Syntax error in file: %s' % (e.filename)
         print str(e)
         sys.exit(1)

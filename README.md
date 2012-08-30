@@ -29,11 +29,11 @@ the following format:
 Example attribute values using the name `dfw1-maas-stage-api0` with a node file
 stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
 
-* region: `dfw` (file: `region/dfw.dyp`)
-* datacenter: `dfw1` (file: `datacenter/dfw1.dyp`)
-* product: `maas` (file: `product/maas.dyp`)
-* environment: `stage` (file: `environment/stage.dyp`)
-* purpose: `api` (file: `purpose/api.dyp`)
+* region: `dfw` (file: `regions/dfw.dyp`)
+* datacenter: `dfw1` (file: `datacenters/dfw1.dyp`)
+* product: `maas` (file: `products/maas.dyp`)
+* environment: `stage` (file: `environments/stage.dyp`)
+* purpose: `api` (file: `purposes/api.dyp`)
 
 ## Running it
 
@@ -43,7 +43,7 @@ stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
 
 For a machine with name `ord1-maas-prod-api0`, with the following files:
 
-* environment/prod.dyp:
+* environments/prod.dyp:
 
 `
     {
@@ -53,7 +53,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* region/ord1.dyp:
+* regions/ord1.dyp:
 
 `
     {
@@ -61,7 +61,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* purpose/api.dyp:
+* purposes/api.dyp:
 
 `
     {
