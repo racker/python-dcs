@@ -2,7 +2,10 @@
 
 Dynamic Chef Solo provides an easier to produce the JSON attributes used by Chef Solo.
 
-DSC sets up a series of JSON-like files that are combined at build time to a JSON file suitable for use by Chef Solo.  By building in concepts like environment, datacenter, purpose, and individual node attributes we can produce a richer and easier to use configuration system.
+DSC sets up a series of JSON-like files that are combined at build time to a
+JSON file suitable for use by Chef Solo.  By building in concepts like
+environment, datacenter, purpose, and individual node attributes we can
+produce a richer and easier to use configuration system.
 
 ## Installation
 
@@ -15,11 +18,16 @@ can be used by Chef Solo.
 
 Attributes are combined (merged) in the following order:
 
-2. product
-3. environment
-4. region
-5. data center
-6. purpose
+1. product (directory: products/)
+2. environment (directory: environments/)
+3. region (directory: regions/)
+4. data center (directory: datacenters/)
+5. purpose (directory: purposes/)
+
+Only attribute which is treated specially is `run_list`. This attribute needs
+to be a list and when merging multiple files with this attributes, lists are
+concatenated together. For an example, see the "Example" section bellow.
+
 
 Attributes are inferred from the node name which means the name needs to be in
 the following format:
@@ -30,7 +38,7 @@ Example attribute values using the name `dfw1-maas-stage-api0` with a node file
 stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
 
 * region: `dfw` (file: `regions/dfw.dyp`)
-* datacenter: `dfw1` (file: `datacenters/dfw1.dyp`)
+* data center: `dfw1` (file: `datacenters/dfw1.dyp`)
 * product: `maas` (file: `products/maas.dyp`)
 * environment: `stage` (file: `environments/stage.dyp`)
 * purpose: `api` (file: `purposes/api.dyp`)
@@ -43,7 +51,7 @@ stored in `nodes/dfw1-maas-stage-api0.k1k.me.dyp`:
 
 For a machine with name `ord1-maas-prod-api0`, with the following files:
 
-* environments/prod.dyp:
+* `environments/prod.dyp`:
 
 `
     {
@@ -53,7 +61,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* regions/ord1.dyp:
+* `regions/ord1.dyp`:
 
 `
     {
@@ -61,7 +69,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* purposes/api.dyp:
+* `purposes/api.dyp`:
 
 `
     {
@@ -70,7 +78,7 @@ For a machine with name `ord1-maas-prod-api0`, with the following files:
     }
 `
 
-* nodes/ord1-maas-prod-api0.k1k.me.dyp:
+* `nodes/ord1-maas-prod-api0.k1k.me.dyp`:
 
 `
     {
