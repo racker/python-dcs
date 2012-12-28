@@ -125,8 +125,14 @@ class ResourceGather(object):
 
         for current_node in self._nodes:
             current_node.output['peers'] = []
+            current_node_environment = current_node._explode_hostname()['environment']
+
             for node in self._nodes:
-                if node._hostname != current_node._hostname:
+                environment = node._explode_hostname()['environment']
+
+                # Only consider nodes in the same environment as peers
+                if node._hostname != current_node._hostname and \
+                   current_node_environment == environment:
                     nout = deepcopy(node.output)
                     nout.pop('peers', None)
                     current_node.output['peers'].append(nout)
